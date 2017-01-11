@@ -1,0 +1,39 @@
+{% extends 'mao/base.html' %}
+{% load staticfiles %}
+{% block title %}Practice{% endblock %}
+
+{% block body %}
+
+    <!-- Header -->
+    <header>
+        <span class="skills">Interactive tool to learn Mandarin</span>
+    </header>
+    <!-- Exercises Section -->
+    <section id="contact" style="height:1000px;">
+        <div class="dropdown" align="center">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="font-size:15px;width:300px">Exercises
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" style="left: 50%; margin-left:-150px; width:300px;">
+                <li><a href="#" id="AX">Same/different discrimination</a></li>
+                <li><a href="#" id="ABX">Oddball discrimination</a></li>
+                <li><a href="#" id="AFC2">Multiple choice (2 options)</a></li>
+                <li><a href="#" id="AFC4">Multiple choice (4 options)</a></li>
+            </ul>
+        </div>
+        <div id="game" align="center" style="margin-top: 20px; margin-right:auto; margin-left:auto; height:500px; width: 500px; border: 1px solid #999999;">
+            <div class="title" style="margin-top:20px; font-size:30px;">AX Game</div>
+            <div id="choices"></div>
+            <div id="correct">correct rounds: 0</div>
+            <div id="incorrect">incorrect rounds: 0</div>
+            <div id="result" style="margin-bottom:20px;"></div>
+            <div id="countdown"></div>
+        </div>
+    </section>
+
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'mao/js/game.js' %}"></script>
+{% endblock %}

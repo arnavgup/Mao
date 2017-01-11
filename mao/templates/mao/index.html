@@ -1,0 +1,92 @@
+{% extends 'mao/base.html' %}
+{% load staticfiles %}
+{% block title %}Mao{% endblock %}
+
+{% block body %}
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="{% static 'mao/img/mao_logo_large.png' %}" alt="" width="300" style="border-radius: 120px;" >
+                    <div class="intro-text">
+                        <hr class="star-light">
+                        <span class="skills">Interactive tool to learn Mandarin</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Login Section -->
+    <section id="login">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>LOG IN</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+                    <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+                    <form name="sentMessage" id="contactForm" novalidate>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Andrew ID</label>
+                                <input type="text" class="form-control" placeholder="Andrew ID" id="name" required data-validation-required-message="Please enter your Andrew id.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Password</label>
+                                <input type="password" class="form-control" placeholder="Password" id="password" required data-validation-required-message="Please enter your password.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="success"></div>
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <button type="submit" class="btn btn-success btn-lg">Lets start</button>
+                                <a class="btn btn-success btn-lg" href="registration.html" role="button">Sign Up</a>
+                                <button type="submit" class="btn btn-success btn-lg">Free practice</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- About Section -->
+    <section class="success" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>About</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-2">
+                    <p>Welcome to the Mandarin Acquisition Online (MAO) training program. This site is designed to help non-native learners of Mandarin Chinese improve their listening and Pinyin abilities. Learners are encouraged to register through the site so that they can track their progress either independently or as part of a required class.
+</p>
+                </div>
+                <div class="col-lg-4">
+                    <p><b>Site requirements</b>: The site uses xxxxxxx [whatever you plan on using for the audio player- flash? Javascript? And any specific browser requirements you think users should have]. Because this is an audio training program, we recommend users wear headphones.
+</p>
+                </div>
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <a href="#" class="btn btn-lg btn-outline">
+                        <i class="fa fa-download"></i> References
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
