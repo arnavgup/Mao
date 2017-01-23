@@ -125,6 +125,7 @@ var roundAX = {
     },
 
     start: function () {
+        document.getElementById("instructions").innerHTML = "If the sounds are the same, press S. If the sounds are different, press D";
         this.init();
         this.play();
     },
@@ -200,6 +201,7 @@ var roundABX = {
     },
 
     start: function () {
+        document.getElementById("instructions").innerHTML = "Press 1, 2, or 3 on the keyboard to select the different sound";
         this.init();
         this.play();
     },
@@ -239,6 +241,7 @@ var roundAFC2 = {
     },
 
     start: function () {
+        document.getElementById("instructions").innerHTML = "Press 1 or 2 to select the correct pinyin";
         this.init();
         this.play();
     },
@@ -309,12 +312,15 @@ function start(gameType) {
 function main() {
     document.getElementById("AX").addEventListener('click',function () {
         start(game.AX);
+        document.getElementById("instructions").innerHTML = "If the sounds are the same, press S. If the sounds are different, press D";
     }  );
     document.getElementById("ABX").addEventListener('click',function () {
         start(game.ABX);
+        document.getElementById("instructions").innerHTML = "Press 1, 2, or 3 on the keyboard to select the different sound";
     }  );
     document.getElementById("AFC2").addEventListener('click',function () {
         start(game.AFC2);
+        document.getElementById("instructions").innerHTML = "Press 1 or 2 to select the correct pinyin";
     }  );
     document.getElementById("AFC4").addEventListener('click',function () {
         start(game.AFC4);
