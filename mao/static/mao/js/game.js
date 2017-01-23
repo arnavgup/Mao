@@ -40,6 +40,7 @@ var player = {
             switch (player.gameType) {
                 case game.AX: roundAX.start(); break;
                 case game.ABX: roundABX.start(); break;
+                case game.AFC2: roundAFC2.start(); break;
             }
         }, 5000);
         countdown();
@@ -52,8 +53,8 @@ var player = {
                     return roundAX.check(result);
                 case game.ABX:
                     return roundABX.check(result);
-                default:
-                    return roundAX.check(result);
+                case game.AFC2:
+                    return roundAFC2.check(result);
             }
         }
         var output = roundCheck(result);
@@ -129,6 +130,7 @@ var roundAX = {
     },
 
     check: function (result) {
+        this.audioComplete = false;
         return result === this.same;
     }
 };
@@ -203,15 +205,62 @@ var roundABX = {
     },
 
     check: function (result) {
+        this.audioComplete = false;
+        return result === this.number;
+    }
+};
+
+
+var roundAFC2 = {
+    audio: null,
+    number: 1,
+    audioComplete: false,
+
+    init: function () {
+        document.getElementById("result").innerHTML = "";
+        this.audioComplete = false;
+        var x = Math.floor(Math.random() * 2);
+        this.audio = new Audio('/static/mao/sounds/F1_chuo1.wav');
+        if (x === 0) {
+            this.number = 1;
+            document.getElementById("choices").innerHTML = "1.chuo1 2.chuo2";
+        }
+        else {
+            this.number = 2;
+            document.getElementById("choices").innerHTML = "1.chuo2 2.chuo1";
+        }
+        this.audio.addEventListener('ended', function () {
+            roundAFC2.audioComplete = true;
+        });
+    },
+
+    play: function () {
+        this.audio.play();
+    },
+
+    start: function () {
+        this.init();
+        this.play();
+    },
+
+    check: function (result) {
+        this.audioComplete = false;
         return result === this.number;
     }
 };
 
 function keyListener(event) {
-    var audioComplete = false;
+    var audioComplete = true;
     switch (player.gameType) {
-        case game.AX: audioComplete = roundAX.audioComplete;
-        case game.ABX: audioComplete = roundABX.audioComplete;
+        case game.AX:
+            audioComplete = roundAX.audioComplete;
+            break;
+        case game.ABX:
+            audioComplete = roundABX.audioComplete;
+            break;
+        case game.AFC2:
+            audioComplete = roundAFC2.audioComplete;
+            break;
     }
     if (audioComplete) {
         var x = event.which || event.keyCode;
@@ -237,6 +286,16 @@ function keyListener(event) {
             // 3
             else if (x == 51) {
                 player.check(3);
+            }
+        }
+        else if (player.gameType === game.AFC2) {
+            // 1
+            if (x == 49) {
+                player.check(1);
+            }
+            // 2
+            else if (x == 50) {
+                player.check(2);
             }
         }
     }
