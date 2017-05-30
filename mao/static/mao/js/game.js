@@ -15,7 +15,7 @@ var countdown = function () {
         };
         count(5);
         var time = 4;
-        var interval = setInterval(function() {
+        interval = setInterval(function() {
             count(time);
             time--;
             if (time <= 0) {
@@ -73,6 +73,20 @@ var player = {
     update: function () {
         document.getElementById("correct").innerHTML = "correct rounds: " + this.correct;
         document.getElementById("incorrect").innerHTML = "incorrect rounds: " + this.incorrect;
+    },
+
+    stop: function () {
+        switch (player.gameType) {
+            case game.AX:
+                roundAX.stop();
+                break;
+            case game.ABX:
+                roundABX.stop();
+                break;
+            case game.AFC2:
+                roundAFC2.stop();
+                break;
+        }
     }
 };
 
@@ -83,6 +97,7 @@ var roundAX = {
     same: true,
 
     init: function () {
+        document.getElementById("choices").innerHTML="";
         document.getElementById("result").innerHTML = "";
         this.audioComplete = false;
         var x = Math.floor(Math.random() * 4);
@@ -125,9 +140,16 @@ var roundAX = {
     },
 
     start: function () {
+
+        document.getElementById("choices").innerHTML = "";
         document.getElementById("instructions").innerHTML = "If the sounds are the same, press S. If the sounds are different, press D";
         this.init();
         this.play();
+    },
+
+    stop: function () {
+        this.audio1.stop();
+        this.audio2.stop();
     },
 
     check: function (result) {
@@ -145,6 +167,7 @@ var roundABX = {
 
     init: function () {
         document.getElementById("result").innerHTML = "";
+        document.getElementById("choices").innerHTML = "";
         this.audioComplete = false;
         var x = Math.floor(Math.random() * 6);
         var sound1 = '/static/mao/sounds/F1_chuo1.wav';
@@ -201,9 +224,16 @@ var roundABX = {
     },
 
     start: function () {
+        document.getElementById("choices").innerHTML = ""
         document.getElementById("instructions").innerHTML = "Press 1, 2, or 3 on the keyboard to select the different sound";
         this.init();
         this.play();
+    },
+
+    stop: function () {
+        this.audio1.stop();
+        this.audio2.stop();
+        this.audio3.stop();
     },
 
     check: function (result) {
@@ -246,7 +276,12 @@ var roundAFC2 = {
         this.play();
     },
 
+    stop: function () {
+        this.audio1.stop();
+    },
+
     check: function (result) {
+        document.getElementById("choices").innerHTML = "";
         this.audioComplete = false;
         return result === this.number;
     }
@@ -305,6 +340,8 @@ function keyListener(event) {
 }
 
 function start(gameType) {
+    //player.stop();
+    //stop = true;
     player.gameType = gameType;
     setTimeout(player.newRound(gameType), 5000);
 }
@@ -312,10 +349,12 @@ function start(gameType) {
 function main() {
     document.getElementById("AX").addEventListener('click',function () {
         start(game.AX);
+        document.getElementById("choices").innerHTML="";
         document.getElementById("instructions").innerHTML = "If the sounds are the same, press S. If the sounds are different, press D";
     }  );
     document.getElementById("ABX").addEventListener('click',function () {
         start(game.ABX);
+        document.getElementById("choices").innerHTML="";
         document.getElementById("instructions").innerHTML = "Press 1, 2, or 3 on the keyboard to select the different sound";
     }  );
     document.getElementById("AFC2").addEventListener('click',function () {
